@@ -1,9 +1,9 @@
 import express from 'express';
-const app = express();
-// const connectDatabase = require('./config/database');
+import connectDatabase from './config/database.js';
 import dotenv from 'dotenv';
 import productRoutes from './routes/product.routes.js';
 
+const app = express();
 const PORT = process.env.PORT || 3099;
 
 dotenv.config();
@@ -14,7 +14,9 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 });
 
-// connectDatabase();
+// connect to db
+connectDatabase();
+
 // Routes
 app.use("/api/products", productRoutes);
 
