@@ -12,11 +12,7 @@ const ProductCard = ({ product }) => {
             <div className="font-raleway p-4 rounded flex flex-col gap-3 group hover:shadow-lg transition duration-300 ease-in-out">
                 {/* product image  */}
                 <div className="h-80 w-full relative rounded">
-                    <img
-                        src={product.gallery[0]}
-                        alt={product.name}
-                        className="w-full h-full object-cover rounded"
-                    />
+                    <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover rounded" />
                     {!product.inStock && (
                         <div className="absolute top-0 left-0 w-full h-full bg-white/50 text-[#8D8F9A] flex items-center justify-center">
                             <p className="uppercase text-2xl font-light bg-white/60 p-1 rounded-full">
@@ -54,7 +50,7 @@ const ProductCard = ({ product }) => {
                 <div>
                     <h3 className="font-light text-xl">{product.name}</h3>
                     <p className="font-semibold">
-                        {product.prices[0].currency.symbol} {product.prices[0].amount}
+                        {product.price}
                     </p>
                 </div>
             </div>
