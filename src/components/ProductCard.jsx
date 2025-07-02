@@ -52,6 +52,24 @@ const ProductCard = ({ product }) => {
                     <p className="font-semibold">
                         {product.price}
                     </p>
+                    <button
+                        className={`mt-3 w-full py-2 rounded bg-primary text-white font-semibold transition duration-200 ${!product.inStock ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-dark'}`}
+                        disabled={!product.inStock}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            if (!product.inStock) return;
+                            dispatch(
+                                addToCart({
+                                    productId: product._id,
+                                    quantity: 1,
+                                    product: product,
+                                })
+                            );
+                        }}
+                    >
+                        {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                    </button>
                 </div>
             </div>
         </Link>
