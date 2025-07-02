@@ -1,5 +1,7 @@
-const app = require('./app');
-const connectDatabase = require('./config/database');
+import express from 'express';
+const app = express();
+// const connectDatabase = require('./config/database');
+import dotenv from 'dotenv';
 const PORT = process.env.PORT || 3099;
 
 // UncaughtException Error
@@ -11,7 +13,7 @@ process.on('uncaughtException', (err) => {
 // connectDatabase();
 
 const server = app.listen(PORT, () => {
-    console.log(`Server running`)
+    console.log(`Server running on port ${PORT}`);
 });
 
 // Unhandled Promise Rejection
