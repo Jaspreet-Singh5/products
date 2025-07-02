@@ -2,20 +2,33 @@ import ProductCard from "../components/ProductCard";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../graphql/queries";
 import Spinner from "../components/Spinner";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const HomePage = () => {
     const { loading, error, data } = useQuery(GET_PRODUCTS);
+    const [products, setProducts] = useState([]);
+    const [error, setError] = useState();
+
     if (error) return `Error! ${error.message}`;
+
+    useEffect(() => {
+        // fetch products from the api
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`)
+            .then(res => setProducts(res?.data))
+            .catch(err => setError(err));
+    });
+    
     return (
         <>
             <section className="py-10">
                 <div className="container">
                     <h1 className="text-4xl mb-5">ALL</h1>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {loading ? (
-                            <Spinner loading={loading} />
+                        {!products.length ? (
+                            <Spinner loading={true} />
                         ) : (
-                            data.products.map((product) => (
+                            products?.map((product) => (
                                 <ProductCard product={product} key={product.id} />
                             ))
                         )}
