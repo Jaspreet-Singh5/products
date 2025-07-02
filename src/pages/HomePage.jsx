@@ -29,7 +29,7 @@ const HomePage = () => {
                             <Spinner loading={true} />
                         ) : (
                             products?.map((product) => (
-                                <ProductCard product={product} key={product.id} />
+                                <ProductCard product={product} key={product._id} />
                             ))
                         )}
                     </div>
