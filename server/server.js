@@ -2,6 +2,7 @@ import express from 'express';
 import connectDatabase from './config/database.js';
 import dotenv from 'dotenv';
 import productRoutes from './routes/product.routes.js';
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3099;
@@ -16,6 +17,8 @@ process.on('uncaughtException', (err) => {
 
 // connect to db
 connectDatabase();
+
+app.use(cors());
 
 // Routes
 app.use("/api/products", productRoutes);
