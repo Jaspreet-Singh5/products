@@ -6,19 +6,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const HomePage = () => {
-    const { loading, error, data } = useQuery(GET_PRODUCTS);
+    // const { loading, error, data } = useQuery(GET_PRODUCTS);
     const [products, setProducts] = useState([]);
     const [error, setError] = useState();
-
-    if (error) return `Error! ${error.message}`;
 
     useEffect(() => {
         // fetch products from the api
         axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`)
-            .then(res => setProducts(res?.data))
-            .catch(err => setError(err));
-    });
+        .then(res => setProducts(res?.data))
+        .catch(err => setError(err));
+    }, []); // Add dependency array to avoid infinite requests
     
+    if (error) return <div className="text-center text-red-500 py-10">Sorry, something went wrong while loading products. Please try again later.</div>;
+
     return (
         <>
             <section className="py-10">
